@@ -49,11 +49,14 @@ async def predict_to_json(file: UploadFile = File(...)):
     # print(predictions)
     # print(predictions[0].boxes.data[0][-1])
     # data = str(predictions)
-     
-    info= {
-        "Exercise_type":str(predictions[0,5].item())
+    value=predictions[0,5]
+    print(value)
+    
+    info={
+        "exercise Type":str(value)
     }
     return info
+   
    
 @app.post("/predict_save_image")
 async def predict_and_save(file:UploadFile=File(...)):
