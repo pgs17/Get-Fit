@@ -45,16 +45,16 @@ def get_model_predict( img: Image, model : YOLO, save: bool = False, imgsize : i
                         conf=conf,
                         save=save,                       
                         )
-    # predictions= Transform_predict_to_Dataframe(predictions)
+    predictions= Transform_predict_to_Dataframe(predictions)
     # if flag:
     #     predictions = predictions.to_json(orient='records')
     return predictions
 
 
-# Count predictions
-def count_predictions(predictions: pd.DataFrame) -> int:
+# # Count predictions
+# def count_predictions(predictions: pd.DataFrame) -> int:
      
-    return len(json.loads(predictions))
+#     return len(json.loads(predictions))
 
 
 # add bounding boxes to images by passing image and coordinates
