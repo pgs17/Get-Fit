@@ -38,31 +38,26 @@ async def predict_to_json(file: UploadFile = File(...)):
     model = YOLO("Big DAta.pt")
     image = get_Images_from_Bytes(file.file.read())
     predictions = get_model_predict(image, model)
-    # print(predictions[0].boxes.boxes)
-    # print("______")
-    # print(predictions[0].boxes)
-    # print("______")
-
-    # print(predictions[0]) 
-    # print("______")
-
-    # print(predictions)
-    # print(predictions[0].boxes.data[0][-1])
-    # data = str(predictions)
-    value=predictions[0,5]
-    print(value)
     
-    info={
-        "exercise Type":str(value)
-    }
-    return info
+     
+    clist= predictions[0].boxes.cls
+    cls = set()
+    for cno in clist:
+      cls.add(model.names[int(cno)])
+
+    # print(cls)
+
+    
+    
+    
+    return {"Exercise":cls}
    
    
 @app.post("/predict_save_image")
 async def predict_and_save(file:UploadFile=File(...)):
     model=YOLO("Big DAta.pt")
     img=get_Images_from_Bytes(file.file.read())
-    predictions=get_model_predict(img,model)
+    predictions=get_model_predict(img,model,flag=True)
     bb_box=add_BoundingBoxes(img,predictions)
     processed_image_bytes=get_bytes_from_Images(bb_box)
     save_image(file_name=file.filename,image=bb_box,prediction=predictions)

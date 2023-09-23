@@ -45,9 +45,10 @@ def get_model_predict( img: Image, model : YOLO, save: bool = False, imgsize : i
                         conf=conf,
                         save=save,                       
                         )
-    predictions= Transform_predict_to_Dataframe(predictions)
-    # if flag:
-    #     predictions = predictions.to_json(orient='records')
+    # predictions= Transform_predict_to_Dataframe(predictions)
+    if flag:
+        predictions =  Transform_predict_to_Dataframe(predictions)
+        # predictions = predictions.to_json(orient='records')
     return predictions
 
 
