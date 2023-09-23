@@ -2,22 +2,22 @@
 FROM python:3.11-slim
 
 # 
-WORKDIR /code
+WORKDIR /SIH_BACKND
 
 # # 
-COPY ./requirements.txt /code/requirements.txt
+COPY ./requirements.txt /SIH_BACKND/requirements.txt
 
 # # 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /SIH_BACKND/requirements.txt
 
 RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
 
 
 # # 
-COPY . /code
+COPY . /SIH_BACKND
 
 # #
-WORKDIR /code
+WORKDIR /SIH_BACKND
 EXPOSE 8000
 
 # 
