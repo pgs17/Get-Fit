@@ -7,6 +7,7 @@ import os
 import numpy as np
 import cv2
 from fastapi.responses import RedirectResponse,StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
 import json
  
 
@@ -15,6 +16,22 @@ from Helper.helperfunctions import add_BoundingBoxes,get_Images_from_Bytes,get_b
 
 
 app=FastAPI(title="Get To Know ur Exercise")
+origins = [
+    "http://localhost",
+    "http://localhost:8008",
+    "http://localhost:3000",
+    "https://sih2023-frontend-m337.vercel.app/",
+    "*"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.on_event("startup")
 def startupevent():
